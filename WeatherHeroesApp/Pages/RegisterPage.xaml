@@ -1,0 +1,45 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherHeroesApp.Pages.RegisterPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20">
+            <Label Text="Register" FontSize="24" HorizontalOptions="Center" TextColor="{DynamicResource Primary}" />
+
+            <!-- Input Fields -->
+            <Entry x:Name="FirstNameEntry" Placeholder="First Name" />
+            <Entry x:Name="LastNameEntry" Placeholder="Last Name" />
+            <Entry Placeholder="Email" x:Name="EmailEntry" Keyboard="Email" TextChanged="OnEmailTextChanged" />
+
+            <!-- Password Field -->
+            <HorizontalStackLayout VerticalOptions="Center">
+                <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" TextChanged="OnPasswordTextChanged" />
+                <CheckBox x:Name="ShowPasswordCheckBox" CheckedChanged="OnShowPasswordCheckedChanged" />
+                <Label Text="Show" VerticalOptions="Center" TextColor="{DynamicResource Secondary}" />
+            </HorizontalStackLayout>
+
+            <!-- Validation Rules -->
+            <VerticalStackLayout Margin="10,0,0,0">
+                <Label x:Name="LengthRuleLabel" Text="At least 6 characters" TextColor="Gray" />
+                <Label x:Name="UppercaseRuleLabel" Text="At least 1 uppercase letter" TextColor="Gray" />
+                <Label x:Name="DigitRuleLabel" Text="At least 1 number" TextColor="Gray" />
+                <Label x:Name="SymbolRuleLabel" Text="At least 1 symbol (!@#$%^*)" TextColor="Gray" />
+            </VerticalStackLayout>
+
+            <!-- Confirm Password -->
+            <Entry Placeholder="Confirm Password" x:Name="ConfirmPasswordEntry" IsPassword="True" />
+
+            <!-- Register Button -->
+            <Button Text="Register" Clicked="OnRegisterClicked"
+                    BackgroundColor="{DynamicResource Primary}" TextColor="White" Margin="0,20,0,0" />
+
+            <!-- Error Message -->
+            <Label x:Name="ErrorMessageLabel" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator x:Name="LoadingIndicator" IsVisible="False" IsRunning="False"
+                               VerticalOptions="Center" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

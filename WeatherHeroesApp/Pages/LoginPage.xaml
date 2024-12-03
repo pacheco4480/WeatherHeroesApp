@@ -1,0 +1,42 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherHeroesApp.Pages.LoginPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ContentPage.Content>
+        <Grid>
+            <!-- Main Content -->
+            <VerticalStackLayout Padding="20">
+                <Label Text="Login" FontSize="24" HorizontalOptions="Center" TextColor="{DynamicResource Primary}" />
+
+                <!-- Email Field -->
+                <Entry Placeholder="Email" x:Name="EmailEntry" Keyboard="Email" TextChanged="OnEmailTextChanged" />
+
+                <!-- Password Field -->
+                <HorizontalStackLayout VerticalOptions="Center">
+                    <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" />
+                    <CheckBox x:Name="ShowPasswordCheckBox" CheckedChanged="OnShowPasswordCheckedChanged" />
+                    <Label Text="Show" VerticalOptions="Center" TextColor="{DynamicResource Secondary}" />
+                </HorizontalStackLayout>
+
+                <!-- Login Button -->
+                <Button Text="Login" Clicked="OnLoginClicked" BackgroundColor="{DynamicResource Primary}" TextColor="White" />
+
+                <!-- Error Message -->
+                <Label x:Name="ErrorMessageLabel" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
+
+                <!-- Register Link -->
+                <Label x:Name="RegisterLink"
+                       Text="Don't have an account? Register here."
+                       TextColor="Blue"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold"
+                       Margin="10,0,0,0" />
+            </VerticalStackLayout>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator x:Name="LoadingIndicator" IsRunning="False" IsVisible="False"
+                               VerticalOptions="Center" HorizontalOptions="Center" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
