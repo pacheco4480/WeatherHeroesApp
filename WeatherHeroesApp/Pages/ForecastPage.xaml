@@ -1,0 +1,46 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherHeroesApp.Pages.ForecastPage"
+             Title="5-Day Forecast">
+    <StackLayout Padding="20">
+        <Label Text="5-Day Weather Forecast" 
+               FontSize="24" 
+               HorizontalOptions="Center" />
+
+        <!-- Label to show city name -->
+        <Label x:Name="CityNameLabel" 
+               FontSize="18" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" 
+               Margin="10" />
+
+        <!-- List to show forecast data -->
+        <ListView x:Name="ForecastList" 
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <Image Source="{Binding IconUrl}" WidthRequest="50" HeightRequest="50" />
+                            <StackLayout Orientation="Vertical" Padding="10,0">
+                                <Label Text="{Binding FormattedDate}" FontSize="16" />
+                                <Label Text="{Binding Description}" FontSize="14" />
+                                <Label Text="{Binding Temperature, StringFormat='{}{0}°C'}" FontSize="14" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Label to display errors -->
+        <Label x:Name="ErrorLabel"
+               Text="Error loading data"
+               FontSize="14"
+               TextColor="Red"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               IsVisible="False" />
+        <!-- Initially hidden -->
+    </StackLayout>
+</ContentPage>

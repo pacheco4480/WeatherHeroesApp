@@ -1,0 +1,77 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherHeroesApp.Pages.CreditsPage"
+             Title="Credits"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <!-- Title -->
+            <Label Text="Credits"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="{DynamicResource Primary}" />
+
+            <!-- Project Description -->
+            <Label Text="This project was developed as part of an academic assignment, focusing on interactive weather forecast applications with thematic heroes and animations."
+                   FontSize="16"
+                   TextColor="{DynamicResource Secondary}"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Author Information -->
+            <Label Text="Author: David Pach"
+                   FontSize="16"
+                   FontAttributes="Italic"
+                   TextColor="{DynamicResource Secondary}"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Text="Version: 1.0.0"
+                   FontSize="14"
+                   TextColor="{DynamicResource Secondary}"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Heroes and Weather -->
+            <Frame BackgroundColor="{DynamicResource SecondaryBackground}"
+                   CornerRadius="10"
+                   Padding="15">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Thematic Heroes: Thor, Sub-Zero, Storm, Superman, Batman."
+                           FontSize="14"
+                           TextColor="{DynamicResource Secondary}" />
+                    <Label Text="Weather associations are for educational purposes only."
+                           FontSize="14"
+                           TextColor="{DynamicResource Secondary}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Acknowledgements -->
+            <Frame BackgroundColor="{DynamicResource SecondaryBackground}"
+                   CornerRadius="10"
+                   Padding="15">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Acknowledgements:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource Secondary}" />
+                    <Label Text="• OpenWeatherMap for weather data."
+                           FontSize="14"
+                           TextColor="{DynamicResource Secondary}" />
+                    <Label Text="• Firebase for authentication."
+                           FontSize="14"
+                           TextColor="{DynamicResource Secondary}" />
+                    <Label Text="• LottieFiles for animations."
+                           FontSize="14"
+                           TextColor="{DynamicResource Secondary}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- License -->
+            <Label Text="This application was created for educational purposes and is not intended for commercial use."
+                   FontSize="14"
+                   TextColor="{DynamicResource Secondary}"
+                   HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

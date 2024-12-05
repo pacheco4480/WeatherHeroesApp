@@ -42,4 +42,15 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+
+    <Color x:Key="CardBackground">#F3F4F6</Color>
+    <!-- Fundo do card -->
+    <Color x:Key="PrimaryText">#1F1F1F</Color>
+    <!-- Texto principal -->
+    <Color x:Key="SecondaryText">#6E6E6E</Color>
+    <!-- Texto secundário -->
+    <Color x:Key="Accent">#FF5722</Color>
+    <!-- Temperatura ou destaques -->
+
 </ResourceDictionary>

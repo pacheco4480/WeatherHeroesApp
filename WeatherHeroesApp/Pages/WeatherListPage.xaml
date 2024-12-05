@@ -1,12 +1,71 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherHeroesApp.Pages.WeatherListPage"
-             Title="WeatherListPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Weather"
+             BackgroundColor="White">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <!-- City Name -->
+                <Label x:Name="CityNameLabel"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="Black"
+                       Text="City Name" />
+
+                <!-- Weather Icon -->
+                <Image x:Name="WeatherIcon"
+                       HeightRequest="100"
+                       WidthRequest="100"
+                       HorizontalOptions="Center" />
+
+                <!-- Temperature -->
+                <Label x:Name="TemperatureLabel"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="Black"
+                       Text="Temperature" />
+
+                <!-- Additional Details -->
+                <VerticalStackLayout Spacing="10" Padding="15">
+                    <Label x:Name="WeatherDescriptionLabel"
+                           FontSize="16"
+                           Text="Weather: "
+                           TextColor="Gray" />
+                    <Label x:Name="HumidityLabel"
+                           FontSize="16"
+                           Text="Humidity: "
+                           TextColor="Gray" />
+                    <Label x:Name="WindSpeedLabel"
+                           FontSize="16"
+                           Text="Wind Speed: "
+                           TextColor="Gray" />
+                </VerticalStackLayout>
+
+                <!-- "See More Details" Button -->
+                <Button Text="See More Details"
+                        FontSize="18"
+                        BackgroundColor="Blue"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        WidthRequest="200"
+                        HorizontalOptions="Center"
+                        Clicked="OnSeeMoreDetailsClicked" />
+
+                <!-- Error Message -->
+                <Label x:Name="ErrorLabel"
+                       Text="Could not load weather details."
+                       FontSize="16"
+                       TextColor="Red"
+                       HorizontalOptions="Center"
+                       IsVisible="False" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

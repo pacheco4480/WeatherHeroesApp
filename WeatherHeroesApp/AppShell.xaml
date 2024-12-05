@@ -8,18 +8,24 @@
         <ShellContent ContentTemplate="{DataTemplate pages:WeatherListPage}" />
     </FlyoutItem>
 
-    <!-- Login -->
-    <FlyoutItem Title="Login" Route="LoginPage">
-        <ShellContent ContentTemplate="{DataTemplate pages:LoginPage}" />
+    <!-- Manage Cities -->
+    <FlyoutItem Title="Manage Cities" Route="ManageCitiesPage">
+        <ShellContent ContentTemplate="{DataTemplate pages:ManageCitiesPage}" />
     </FlyoutItem>
 
-    <!-- Register -->
-    <FlyoutItem Title="Register" Route="RegisterPage">
-        <ShellContent ContentTemplate="{DataTemplate pages:RegisterPage}" />
+    <!-- 5-Day Forecast -->
+    <FlyoutItem Title="5-Day Forecast" Route="ForecastPage">
+        <ShellContent ContentTemplate="{DataTemplate pages:ForecastPage}" />
     </FlyoutItem>
 
+    <!-- Credits -->
+    <FlyoutItem Title="Credits" Route="CreditsPage">
+        <ShellContent ContentTemplate="{DataTemplate pages:CreditsPage}" />
+    </FlyoutItem>
+    
     <!-- Logout -->
-    <FlyoutItem Title="Logout" Route="LogoutPage">
+    <FlyoutItem Title="Logout" Route="LoginPage">
         <ShellContent ContentTemplate="{DataTemplate pages:LoginPage}" />
     </FlyoutItem>
+
 </Shell>

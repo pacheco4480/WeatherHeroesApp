@@ -1,8 +1,8 @@
 namespace WeatherHeroesApp.Pages;
 
-public partial class AboutPage : ContentPage
+public partial class CreditsPage : ContentPage
 {
-	public AboutPage()
+	public CreditsPage()
 	{
 		InitializeComponent();
 	}

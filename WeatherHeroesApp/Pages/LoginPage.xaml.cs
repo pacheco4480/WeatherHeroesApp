@@ -14,7 +14,14 @@ public partial class LoginPage : ContentPage
         _authService = new AuthService();
         _validator = new UserValidator();
 
-        // Configure the event to navigate to the registration page
+        ConfigureNavigationEvents();
+    }
+
+    /// <summary>
+    /// Configures navigation to the registration page.
+    /// </summary>
+    private void ConfigureNavigationEvents()
+    {
         var registerTapGesture = new TapGestureRecognizer
         {
             Command = new Command(async () =>
@@ -23,7 +30,7 @@ public partial class LoginPage : ContentPage
                 {
                     if (Shell.Current != null)
                     {
-                        await Shell.Current.GoToAsync("//RegisterPage");
+                        await Shell.Current.GoToAsync("/RegisterPage");
                         Console.WriteLine("Navigated to RegisterPage successfully.");
                     }
                     else
@@ -41,16 +48,15 @@ public partial class LoginPage : ContentPage
     }
 
     /// <summary>
-    /// Event triggered when the "Login" button is clicked.
+    /// Handles the login process.
     /// </summary>
     private async void OnLoginClicked(object sender, EventArgs e)
     {
         string email = EmailEntry.Text?.Trim();
         string password = PasswordEntry.Text;
 
-        // Validations
+        // Validate email
         string emailError = _validator.ValidateEmail(email);
-
         if (!string.IsNullOrEmpty(emailError))
         {
             DisplayErrorMessage(emailError);
@@ -70,9 +76,6 @@ public partial class LoginPage : ContentPage
         {
             string result = await _authService.LoginAsync(email, password);
 
-            // Hide loading indicator
-            LoadingIndicator.IsVisible = false;
-
             if (result == "success")
             {
                 string userId = Preferences.Get("UserId", null);
@@ -87,7 +90,7 @@ public partial class LoginPage : ContentPage
                 // Update menu after login
                 if (Shell.Current is AppShell appShell)
                 {
-                    appShell.UpdateMenuItems();
+                    appShell.CheckAuthentication();
                 }
 
                 await DisplayAlert("Success", $"Welcome, {userName}!", "OK");
@@ -107,13 +110,13 @@ public partial class LoginPage : ContentPage
         }
         finally
         {
-            // Ensure the loading indicator is hidden
+            // Hide loading indicator
             LoadingIndicator.IsVisible = false;
         }
     }
 
     /// <summary>
-    /// Displays an error message on the UI.
+    /// Displays an error message.
     /// </summary>
     private void DisplayErrorMessage(string message)
     {
@@ -122,22 +125,15 @@ public partial class LoginPage : ContentPage
     }
 
     /// <summary>
-    /// Validates the email in real-time as the user types.
+    /// Validates email in real-time as the user types.
     /// </summary>
     private void OnEmailTextChanged(object sender, TextChangedEventArgs e)
     {
         string email = e.NewTextValue;
         string emailError = _validator.ValidateEmail(email);
 
-        if (!string.IsNullOrEmpty(emailError))
-        {
-            ErrorMessageLabel.Text = emailError;
-            ErrorMessageLabel.IsVisible = true;
-        }
-        else
-        {
-            ErrorMessageLabel.IsVisible = false;
-        }
+        ErrorMessageLabel.Text = emailError;
+        ErrorMessageLabel.IsVisible = !string.IsNullOrEmpty(emailError);
     }
 
     /// <summary>
@@ -145,8 +141,6 @@ public partial class LoginPage : ContentPage
     /// </summary>
     private void OnShowPasswordCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        bool isChecked = e.Value;
-
-        PasswordEntry.IsPassword = !isChecked;
+        PasswordEntry.IsPassword = !e.Value;
     }
 }

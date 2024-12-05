@@ -1,0 +1,104 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherHeroesApp.Pages.ManageCitiesPage"
+             Title="Manage Cities">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <!-- Search Bar -->
+                <SearchBar x:Name="CitySearchBar"
+                           Placeholder="Search for a city..."
+                           TextChanged="OnSearchBarTextChanged"
+                           SearchButtonPressed="OnSearchButtonPressed" />
+
+                <!-- Search Suggestions -->
+                <CollectionView x:Name="SuggestionsCollectionView"
+                                ItemsSource="{Binding Suggestions}"
+                                SelectionMode="Single"
+                                IsVisible="False"
+                                SelectionChanged="OnSuggestionSelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Label Text="{Binding DisplayName}" FontSize="16" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Cities List -->
+                <CollectionView x:Name="CitiesCollectionView" 
+                                SelectionMode="None"
+                                VerticalOptions="FillAndExpand"
+                                HeightRequest="500">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10" 
+                                   BackgroundColor="#2E2E2E" 
+                                   CornerRadius="12" 
+                                   BorderColor="#A9A9A9" 
+                                   HasShadow="True" 
+                                   Margin="0,0,0,15">
+                                <Grid Padding="10" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto, Auto">
+
+                                    <!-- Weather Icon -->
+                                    <Image Source="{Binding WeatherIcon}" 
+                                           WidthRequest="40" 
+                                           HeightRequest="40" 
+                                           Grid.Column="0" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="Center" />
+
+                                    <!-- City Name and Temperature -->
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start">
+                                        <Label Text="{Binding Name}" FontSize="18" TextColor="White" />
+                                        <Label Text="{Binding Temperature}" FontSize="16" TextColor="LightGray" />
+                                    </VerticalStackLayout>
+
+                                    <!-- Buttons Row -->
+                                    <StackLayout Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="15" HorizontalOptions="Fill" VerticalOptions="End">
+
+                                        <!-- Set as Reference Button -->
+                                        <Button Text="Set as Reference"
+            BackgroundColor="Blue"
+            TextColor="White"
+            CornerRadius="10"
+            HeightRequest="40"
+            WidthRequest="150" 
+                                            HorizontalOptions="Start"
+            CommandParameter="{Binding .}" 
+            Clicked="OnSetAsReferenceClicked" />
+
+                                            <!-- Remove Button -->
+                                            <Button Text="Remove"
+            BackgroundColor="Red"
+            TextColor="White"
+            CornerRadius="10"
+            HeightRequest="40"
+            WidthRequest="100" 
+                                                HorizontalOptions="End"
+            CommandParameter="{Binding .}" 
+            Clicked="OnRemoveCity" />
+                                    </StackLayout>
+
+
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Empty State Message -->
+                <Label x:Name="EmptyStateLabel"
+                       Text="No cities added. Search to add a city."
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       VerticalOptions="CenterAndExpand"
+                       IsVisible="False" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
