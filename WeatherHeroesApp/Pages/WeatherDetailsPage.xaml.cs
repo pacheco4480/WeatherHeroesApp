@@ -1,20 +1,21 @@
 using WeatherHeroesApp.Models;
 using WeatherHeroesApp.Services;
+using WeatherHeroesApp.Helpers;
+using SkiaSharp.Extended.UI.Controls;
 
 namespace WeatherHeroesApp.Pages;
 
 public partial class WeatherDetailsPage : ContentPage
 {
     private readonly WeatherService _weatherService;
-    private const string ReferenceCityKey = "ReferenceCity";
 
-    public WeatherDetailsPage(string referenceCity)
+    public WeatherDetailsPage(string cityName)
     {
         InitializeComponent();
         _weatherService = new WeatherService();
 
-        // Load weather details for the reference city
-        LoadWeatherDetails(referenceCity);
+        // Load weather details for the specified city
+        LoadWeatherDetails(cityName);
     }
 
     /// <summary>
@@ -31,42 +32,70 @@ public partial class WeatherDetailsPage : ContentPage
 
             if (weather != null)
             {
-                CityNameLabel.Text = string.IsNullOrEmpty(weather.Name) ? "City: Data unavailable" : weather.Name;
+                // City Name
+                CityNameLabel.Text = string.IsNullOrEmpty(weather.Name)
+                    ? "City: Data unavailable"
+                    : weather.Name;
+
+                // Weather Icon
                 WeatherIcon.Source = string.IsNullOrEmpty(weather.Weather.FirstOrDefault()?.Icon)
-                    ? "default_icon.png" // A default icon in case of missing data
+                    ? "default_icon.png"
                     : $"https://openweathermap.org/img/wn/{weather.Weather.FirstOrDefault()?.Icon}@2x.png";
 
+                // Temperature
                 TemperatureLabel.Text = weather.Main.Temp == 0
                     ? "Temperature: Data unavailable"
                     : $"{weather.Main.Temp}°C";
 
+                // Weather Description
+                WeatherDescriptionLabel.Text = !string.IsNullOrEmpty(weather.Weather.FirstOrDefault()?.Main)
+                    ? AnimationHelper.GetMessage(weather.Weather.FirstOrDefault()?.Main)
+                    : "Condition: Data unavailable";
+
+                // Description
+                var description = weather.Weather.FirstOrDefault()?.Description;
+                DescriptionLabel.Text = string.IsNullOrEmpty(description)
+                    ? "Description: Data unavailable"
+                    : $"Description: {char.ToUpper(description[0])}{description.Substring(1)}";
+
+                // Feels Like
                 FeelsLikeLabel.Text = weather.Main.FeelsLike == 0
                     ? "Feels Like: Data unavailable"
                     : $"Feels Like: {weather.Main.FeelsLike}°C";
 
+                // Humidity
                 HumidityLabel.Text = weather.Main.Humidity == 0
                     ? "Humidity: Data unavailable"
                     : $"Humidity: {weather.Main.Humidity}%";
 
+                // Wind Speed
                 WindSpeedLabel.Text = weather.Wind.Speed == 0
                     ? "Wind Speed: Data unavailable"
                     : $"Wind Speed: {weather.Wind.Speed} m/s";
 
+                // Pressure
                 PressureLabel.Text = weather.Main.Pressure == 0
                     ? "Pressure: Data unavailable"
                     : $"Pressure: {weather.Main.Pressure} hPa";
 
+                // Sunrise
                 SunriseLabel.Text = weather.Sys.Sunrise == 0
                     ? "Sunrise: Data unavailable"
                     : $"Sunrise: {UnixTimeToLocalTime(weather.Sys.Sunrise)}";
 
+                // Sunset
                 SunsetLabel.Text = weather.Sys.Sunset == 0
                     ? "Sunset: Data unavailable"
                     : $"Sunset: {UnixTimeToLocalTime(weather.Sys.Sunset)}";
 
-                WeatherConditionLabel.Text = string.IsNullOrEmpty(weather.Weather.FirstOrDefault()?.Description)
-                    ? "Condition: Data unavailable"
-                    : $"Condition: {weather.Weather.FirstOrDefault()?.Description}";
+                // Update animation and background color
+                WeatherAnimationView.Source = new SKFileLottieImageSource
+                {
+                    File = AnimationHelper.GetAnimation(weather.Weather.FirstOrDefault()?.Main)
+                };
+
+                HeroIcon.Source = AnimationHelper.GetIcon(weather.Weather.FirstOrDefault()?.Main);
+                MainGrid.BackgroundColor = Color.FromHex(AnimationHelper.GetBackgroundColor(weather.Weather.FirstOrDefault()?.Main));
             }
             else
             {
@@ -78,6 +107,7 @@ public partial class WeatherDetailsPage : ContentPage
             DisplayError($"Error loading weather details: {ex.Message}");
         }
     }
+
 
 
     /// <summary>

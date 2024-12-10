@@ -69,11 +69,11 @@ public partial class LoginPage : ContentPage
             return;
         }
 
-        // Show loading indicator
-        LoadingIndicator.IsVisible = true;
-
         try
         {
+            // Show LoadingPage
+            await Navigation.PushModalAsync(new LoadingPage());
+
             string result = await _authService.LoginAsync(email, password);
 
             if (result == "success")
@@ -96,24 +96,23 @@ public partial class LoginPage : ContentPage
                 await DisplayAlert("Success", $"Welcome, {userName}!", "OK");
 
                 // Navigate to the home page
+                await Navigation.PopModalAsync(); // Close the LoadingPage
                 await Shell.Current.GoToAsync("//WeatherListPage");
             }
             else
             {
+                await Navigation.PopModalAsync(); // Close the LoadingPage
                 DisplayErrorMessage(result);
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Unexpected error during login: {ex.Message}");
+            await Navigation.PopModalAsync(); // Close the LoadingPage
             DisplayErrorMessage("An error occurred during login. Please try again.");
         }
-        finally
-        {
-            // Hide loading indicator
-            LoadingIndicator.IsVisible = false;
-        }
     }
+
 
     /// <summary>
     /// Displays an error message.

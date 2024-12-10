@@ -1,5 +1,8 @@
 using WeatherHeroesApp.Models;
 using WeatherHeroesApp.Services;
+using WeatherHeroesApp.Helpers;
+using SkiaSharp.Extended.UI.Controls;
+
 
 namespace WeatherHeroesApp.Pages;
 
@@ -28,16 +31,14 @@ public partial class WeatherListPage : ContentPage
             ErrorLabel.IsVisible = false;
 
             string referenceCity = Preferences.Get(ReferenceCityKey, null);
-
             WeatherModel weather;
+
             if (!string.IsNullOrEmpty(referenceCity))
             {
-                // Load weather for the reference city
                 weather = await _weatherService.GetCurrentWeatherAsync(referenceCity);
             }
             else
             {
-                // Load weather based on current location
                 var city = await _locationService.GetCurrentCityAsync();
                 weather = await _weatherService.GetCurrentWeatherAsync(city.Name);
             }
@@ -47,17 +48,20 @@ public partial class WeatherListPage : ContentPage
                 CityNameLabel.Text = weather.Name;
                 WeatherIcon.Source = $"https://openweathermap.org/img/wn/{weather.Weather.FirstOrDefault()?.Icon}@2x.png";
                 TemperatureLabel.Text = $"{weather.Main.Temp}°C";
+                WeatherDescriptionLabel.Text = AnimationHelper.GetMessage(weather.Weather.FirstOrDefault()?.Main);
 
-                // Replace Feels Like with Weather Description
-                WeatherDescriptionLabel.Text = $"Weather: {weather.Weather.FirstOrDefault()?.Description}";
+                // Atualiza a animação
+                WeatherAnimationView.Source = new SKFileLottieImageSource
+                {
+                    File = AnimationHelper.GetAnimation(weather.Weather.FirstOrDefault()?.Main)
+                };
 
-                // Display other weather information
+                HeroIcon.Source = AnimationHelper.GetIcon(weather.Weather.FirstOrDefault()?.Main);
                 HumidityLabel.Text = $"Humidity: {weather.Main.Humidity}%";
                 WindSpeedLabel.Text = $"Wind Speed: {weather.Wind.Speed} m/s";
 
-                // Handle missing or zero values for wind speed
-                if (weather.Wind.Speed == 0)
-                    WindSpeedLabel.Text = "Wind Speed: Data unavailable";
+                // Atualiza a cor de fundo dinamicamente com base na condição climática
+                this.BackgroundColor = Color.FromHex(AnimationHelper.GetBackgroundColor(weather.Weather.FirstOrDefault()?.Main));
             }
             else
             {
@@ -69,6 +73,7 @@ public partial class WeatherListPage : ContentPage
             DisplayError($"Error loading weather data: {ex.Message}");
         }
     }
+
 
     /// <summary>
     /// Navigates to the WeatherDetailsPage to show more detailed weather information.

@@ -1,52 +1,63 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="WeatherHeroesApp.Pages.WeatherListPage"
-             Title="Weather"
-             BackgroundColor="White">
+             Title="Weather">
 
-    <ContentPage.Content>
+    <Grid x:Name="MainGrid" BackgroundColor="{Binding BackgroundColor}">
+
         <ScrollView>
             <VerticalStackLayout Padding="20" Spacing="15">
 
-                <!-- City Name -->
-                <Label x:Name="CityNameLabel"
-                       FontSize="26"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       TextColor="Black"
-                       Text="City Name" />
+                <skia:SKLottieView x:Name="WeatherAnimationView"
+                                   HeightRequest="120"
+                                   WidthRequest="120"
+                                   RepeatCount="-1"
+                                   HorizontalOptions="Center" />
 
-                <!-- Weather Icon -->
-                <Image x:Name="WeatherIcon"
-                       HeightRequest="100"
-                       WidthRequest="100"
-                       HorizontalOptions="Center" />
+                <Frame Padding="15"
+                       BackgroundColor="#80000000" 
+                       CornerRadius="10" 
+                       HorizontalOptions="FillAndExpand">
+                    <VerticalStackLayout Spacing="15">
+                        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Label x:Name="CityNameLabel"
+                                   FontSize="26"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Text="City Name" />
+                            <Image x:Name="WeatherIcon"
+                                   HeightRequest="80"
+                                   WidthRequest="80"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
 
-                <!-- Temperature -->
-                <Label x:Name="TemperatureLabel"
-                       FontSize="22"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       TextColor="Black"
-                       Text="Temperature" />
+                        <VerticalStackLayout Spacing="10">
+                            <Label x:Name="TemperatureLabel"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   TextColor="White"
+                                   Text="Temperature" />
 
-                <!-- Additional Details -->
-                <VerticalStackLayout Spacing="10" Padding="15">
-                    <Label x:Name="WeatherDescriptionLabel"
-                           FontSize="16"
-                           Text="Weather: "
-                           TextColor="Gray" />
-                    <Label x:Name="HumidityLabel"
-                           FontSize="16"
-                           Text="Humidity: "
-                           TextColor="Gray" />
-                    <Label x:Name="WindSpeedLabel"
-                           FontSize="16"
-                           Text="Wind Speed: "
-                           TextColor="Gray" />
-                </VerticalStackLayout>
+                            <Label x:Name="WeatherDescriptionLabel"
+                                   FontSize="16"
+                                   Text="Weather: "
+                                   TextColor="White" />
 
-                <!-- "See More Details" Button -->
+                            <Label x:Name="HumidityLabel"
+                                   FontSize="16"
+                                   Text="Humidity: "
+                                   TextColor="White" />
+
+                            <Label x:Name="WindSpeedLabel"
+                                   FontSize="16"
+                                   Text="Wind Speed: "
+                                   TextColor="White" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+
                 <Button Text="See More Details"
                         FontSize="18"
                         BackgroundColor="Blue"
@@ -57,7 +68,13 @@
                         HorizontalOptions="Center"
                         Clicked="OnSeeMoreDetailsClicked" />
 
-                <!-- Error Message -->
+                <Image x:Name="HeroIcon"
+                       WidthRequest="80"
+                       HeightRequest="80"
+                       HorizontalOptions="End"
+                       VerticalOptions="End"
+                       Margin="10" />
+
                 <Label x:Name="ErrorLabel"
                        Text="Could not load weather details."
                        FontSize="16"
@@ -67,5 +84,5 @@
 
             </VerticalStackLayout>
         </ScrollView>
-    </ContentPage.Content>
+    </Grid>
 </ContentPage>

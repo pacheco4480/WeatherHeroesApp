@@ -5,23 +5,21 @@
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="10">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-            <!-- Title -->
             <Label Text="Credits"
                    FontSize="24"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    TextColor="{DynamicResource Primary}" />
 
-            <!-- Project Description -->
+
             <Label Text="This project was developed as part of an academic assignment, focusing on interactive weather forecast applications with thematic heroes and animations."
                    FontSize="16"
                    TextColor="{DynamicResource Secondary}"
                    HorizontalTextAlignment="Center" />
 
-            <!-- Author Information -->
-            <Label Text="Author: David Pach"
+            <Label Text="Author: David Pacheco"
                    FontSize="16"
                    FontAttributes="Italic"
                    TextColor="{DynamicResource Secondary}"
@@ -32,12 +30,12 @@
                    TextColor="{DynamicResource Secondary}"
                    HorizontalTextAlignment="Center" />
 
-            <!-- Heroes and Weather -->
+    
             <Frame BackgroundColor="{DynamicResource SecondaryBackground}"
                    CornerRadius="10"
                    Padding="15">
-                <VerticalStackLayout Spacing="5">
-                    <Label Text="Thematic Heroes: Thor, Sub-Zero, Storm, Superman, Batman."
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Thematic Heroes: Flash, Thor, Cyclops, Hellboy, Batman, Eobard."
                            FontSize="14"
                            TextColor="{DynamicResource Secondary}" />
                     <Label Text="Weather associations are for educational purposes only."
@@ -46,11 +44,10 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Acknowledgements -->
             <Frame BackgroundColor="{DynamicResource SecondaryBackground}"
                    CornerRadius="10"
                    Padding="15">
-                <VerticalStackLayout Spacing="5">
+                <VerticalStackLayout Spacing="10">
                     <Label Text="Acknowledgements:"
                            FontSize="16"
                            FontAttributes="Bold"
@@ -67,11 +64,24 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- License -->
+            <Grid Padding="10"
+                  RowDefinitions="Auto" 
+                  ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                  HorizontalOptions="Center">
+
+                <Image Source="flash.png" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="0" />
+                <Image Source="thor.png" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="1" />
+                <Image Source="cyclops.png" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" />
+                <Image Source="hellboy.png" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="3" />
+                <Image Source="batman.png" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="4" />
+                <Image Source="eobard.png" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="5" />
+            </Grid>
+
             <Label Text="This application was created for educational purposes and is not intended for commercial use."
                    FontSize="14"
                    TextColor="{DynamicResource Secondary}"
                    HorizontalTextAlignment="Center" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

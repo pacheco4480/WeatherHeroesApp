@@ -4,42 +4,82 @@
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Content>
-        <VerticalStackLayout Padding="20">
-            <Label Text="Register" FontSize="24" HorizontalOptions="Center" TextColor="{DynamicResource Primary}" />
+        <ScrollView Padding="20">
+            <VerticalStackLayout Spacing="12" VerticalOptions="Center">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                    <Image Source="flash.png" WidthRequest="50" HeightRequest="50" />
+                    <Image Source="thor.png" WidthRequest="50" HeightRequest="50" />
+                    <Image Source="cyclops.png" WidthRequest="50" HeightRequest="50" />
+                    <Image Source="hellboy.png" WidthRequest="50" HeightRequest="50" />
+                    <Image Source="batman.png" WidthRequest="50" HeightRequest="50" />
+                </HorizontalStackLayout>
 
-            <!-- Input Fields -->
-            <Entry x:Name="FirstNameEntry" Placeholder="First Name" />
-            <Entry x:Name="LastNameEntry" Placeholder="Last Name" />
-            <Entry Placeholder="Email" x:Name="EmailEntry" Keyboard="Email" TextChanged="OnEmailTextChanged" />
+                <Frame BackgroundColor="#373e43" 
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Create an Account"
+                               FontSize="28"
+                               HorizontalOptions="Center"
+                               TextColor="{DynamicResource Primary}"
+                               FontAttributes="Bold" />
 
-            <!-- Password Field -->
-            <HorizontalStackLayout VerticalOptions="Center">
-                <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" TextChanged="OnPasswordTextChanged" />
-                <CheckBox x:Name="ShowPasswordCheckBox" CheckedChanged="OnShowPasswordCheckedChanged" />
-                <Label Text="Show" VerticalOptions="Center" TextColor="{DynamicResource Secondary}" />
-            </HorizontalStackLayout>
+                        <Frame CornerRadius="10" BackgroundColor="Black" Padding="10">
+                            <Entry x:Name="FirstNameEntry" Placeholder="First Name" TextColor="White" PlaceholderColor="White" />
+                        </Frame>
 
-            <!-- Validation Rules -->
-            <VerticalStackLayout Margin="10,0,0,0">
-                <Label x:Name="LengthRuleLabel" Text="At least 6 characters" TextColor="Gray" />
-                <Label x:Name="UppercaseRuleLabel" Text="At least 1 uppercase letter" TextColor="Gray" />
-                <Label x:Name="DigitRuleLabel" Text="At least 1 number" TextColor="Gray" />
-                <Label x:Name="SymbolRuleLabel" Text="At least 1 symbol (!@#$%^*)" TextColor="Gray" />
+                        <Frame CornerRadius="10" BackgroundColor="Black" Padding="10">
+                            <Entry x:Name="LastNameEntry" Placeholder="Last Name" TextColor="White" PlaceholderColor="White" />
+                        </Frame>
+
+                        <Frame CornerRadius="10" BackgroundColor="Black" Padding="10">
+                            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="White" PlaceholderColor="White" TextChanged="OnEmailTextChanged" />
+                        </Frame>
+
+                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                            <Frame Grid.Column="0"
+           CornerRadius="10"
+           BackgroundColor="Black"
+           Padding="10">
+                                <Entry x:Name="PasswordEntry"
+               Placeholder="Password"
+               IsPassword="True"
+               TextColor="White"
+               PlaceholderColor="White"
+               TextChanged="OnPasswordTextChanged" />
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1" Margin="10,0,0,0" Spacing="5">
+                                <Label x:Name="LengthRuleLabel" Text="At least 6 characters" TextColor="Gray" FontSize="12" />
+                                <Label x:Name="UppercaseRuleLabel" Text="At least 1 uppercase letter" TextColor="Gray" FontSize="12" />
+                                <Label x:Name="DigitRuleLabel" Text="At least 1 number" TextColor="Gray" FontSize="12" />
+                                <Label x:Name="SymbolRuleLabel" Text="At least 1 symbol (!@#$%^*)" TextColor="Gray" FontSize="12" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+
+                        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Start" Spacing="5">
+                            <CheckBox x:Name="ShowPasswordCheckBox" CheckedChanged="OnShowPasswordCheckedChanged" />
+                            <Label Text="Show Password" TextColor="{DynamicResource Secondary}" FontSize="14" />
+                        </HorizontalStackLayout>
+
+                        <Frame CornerRadius="10" BackgroundColor="Black" Padding="10">
+                            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" TextColor="White" PlaceholderColor="White" />
+                        </Frame>
+
+                        <Button Text="Register"
+                                Clicked="OnRegisterClicked"
+                                BackgroundColor="{DynamicResource Primary}"
+                                TextColor="White"
+                                HeightRequest="50"
+                                CornerRadius="25" />
+
+                        <Label x:Name="ErrorMessageLabel" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
+
+                    </VerticalStackLayout>
+                </Frame>
             </VerticalStackLayout>
-
-            <!-- Confirm Password -->
-            <Entry Placeholder="Confirm Password" x:Name="ConfirmPasswordEntry" IsPassword="True" />
-
-            <!-- Register Button -->
-            <Button Text="Register" Clicked="OnRegisterClicked"
-                    BackgroundColor="{DynamicResource Primary}" TextColor="White" Margin="0,20,0,0" />
-
-            <!-- Error Message -->
-            <Label x:Name="ErrorMessageLabel" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
-
-            <!-- Loading Indicator -->
-            <ActivityIndicator x:Name="LoadingIndicator" IsVisible="False" IsRunning="False"
-                               VerticalOptions="Center" HorizontalOptions="Center" />
-        </VerticalStackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -57,16 +57,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\batman.png" />
+	  <None Remove="Resources\Images\cyclops.png" />
+	  <None Remove="Resources\Images\eobard.png" />
+	  <None Remove="Resources\Images\flash.png" />
+	  <None Remove="Resources\Images\hellboy.png" />
+	  <None Remove="Resources\Images\thor.png" />
+	  <None Remove="Resources\Raw\clear.json" />
+	  <None Remove="Resources\Raw\clouds.json" />
+	  <None Remove="Resources\Raw\drizzle.json" />
+	  <None Remove="Resources\Raw\dust.json" />
+	  <None Remove="Resources\Raw\fog.json" />
+	  <None Remove="Resources\Raw\rain.json" />
+	  <None Remove="Resources\Raw\snowfall.json" />
+	  <None Remove="Resources\Raw\thunder.json" />
+	  <None Remove="Resources\Raw\thunderr.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="Firebase.Auth" Version="1.0.0" />
 		<PackageReference Include="Firebase.Database" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="3.0.0-preview.11" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Helpers\" />
 	  <Folder Include="Resources\Animations\" />
 	</ItemGroup>
 

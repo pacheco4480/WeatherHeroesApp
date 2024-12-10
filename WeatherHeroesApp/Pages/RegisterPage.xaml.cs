@@ -60,13 +60,10 @@ public partial class RegisterPage : ContentPage
     }
 
     /// <summary>
-    /// Event triggered when the "Register" button is clicked.
+    /// Handles the register button click event.
     /// </summary>
     private async void OnRegisterClicked(object sender, EventArgs e)
     {
-        // Clear error messages
-        ErrorMessageLabel.IsVisible = false;
-
         string firstName = FirstNameEntry.Text?.Trim();
         string lastName = LastNameEntry.Text?.Trim();
         string email = EmailEntry.Text?.Trim();
@@ -108,36 +105,35 @@ public partial class RegisterPage : ContentPage
             return;
         }
 
-        // Show loading indicator
-        LoadingIndicator.IsVisible = true;
-        LoadingIndicator.IsRunning = true;
-
         try
         {
+            // Show LoadingPage
+            await Navigation.PushModalAsync(new LoadingPage());
+
             string result = await _authService.RegisterAsync(email, password, firstName, lastName);
 
             if (result == "success")
             {
                 await DisplayAlert("Success", "Registration completed successfully! Please login.", "OK");
+
+                // Navigate to LoginPage
+                await Navigation.PopModalAsync(); // Close the LoadingPage
                 await Shell.Current.GoToAsync("/LoginPage");
             }
             else
             {
+                await Navigation.PopModalAsync(); // Close the LoadingPage
                 DisplayErrorMessage(result);
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Unexpected error during registration: {ex.Message}");
+            await Navigation.PopModalAsync(); // Close the LoadingPage
             DisplayErrorMessage("An error occurred during registration. Please try again.");
         }
-        finally
-        {
-            // Hide loading indicator
-            LoadingIndicator.IsVisible = false;
-            LoadingIndicator.IsRunning = false;
-        }
     }
+
 
     /// <summary>
     /// Displays an error message on the UI.

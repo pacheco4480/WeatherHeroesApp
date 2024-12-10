@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using CommunityToolkit.Maui; // Import necessário para o CommunityToolkit
+using CommunityToolkit.Maui;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace WeatherHeroesApp
 {
@@ -10,7 +11,8 @@ namespace WeatherHeroesApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseMauiCommunityToolkit() // Registrar o CommunityToolkit
+                .UseMauiCommunityToolkit() 
+                .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
